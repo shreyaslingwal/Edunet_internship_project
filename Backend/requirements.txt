@@ -1,0 +1,8 @@
+torch
+pandas
+scikit-learn
+joblib
+gradio
+numpy
+seaborn
+Flask
