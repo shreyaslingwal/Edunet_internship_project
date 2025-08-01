@@ -36,7 +36,8 @@ Flask: A micro web framework for Python.
 
 
 
-🧠 Model Architecture
+
+# 🧠 Model Architecture
 The core of this project is a feedforward neural network built with PyTorch. The architecture is as follows:
 
 Input Layer: Takes in 117 features, which is the dimension of the preprocessed data (after one-hot encoding the categorical features).
