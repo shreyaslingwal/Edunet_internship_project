@@ -1,4 +1,4 @@
-##Network Intrusion Detection System
+## Network Intrusion Detection System
 This project is a Network Intrusion Detection System (NIDS) that uses a deep learning model to classify network traffic as either 'normal' or 'anomaly'. The model is built with PyTorch and is deployed as an interactive web application using Gradio and Hugging Face Spaces.
 
 🚀 Live Demo
