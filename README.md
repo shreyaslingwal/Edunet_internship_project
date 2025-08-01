@@ -1,41 +1,32 @@
 ## Network Intrusion Detection System
 This project is a Network Intrusion Detection System (NIDS) that uses a deep learning model to classify network traffic as either 'normal' or 'anomaly'. The model is built with PyTorch and is deployed as an interactive web application using Gradio and Hugging Face Spaces.
 
+
 🚀 Live Demo
 You can access the live demo of the project on Hugging Face Spaces:
-Network Intrusion Detector
+https://huggingface.co/spaces/Tesarac13/Edunet_project_intrusion-detector
+
+
 
 📖 Dataset
 The model was trained on the NSL-KDD dataset, a benchmark dataset for network intrusion detection. This dataset contains various network connection features and is labeled as either normal or an attack.
+https://www.kaggle.com/datasets/sampadab17/network-intrusion-detection 
 
-You can find the dataset on Kaggle: Network Intrusion Detection Dataset
+
 
 🛠️ Technologies Used
 This project utilizes the following technologies:
-
 Python: The core programming language.
-
-
 PyTorch: The deep learning framework used to build and train the neural network. 
-
-
 Pandas & NumPy: For data manipulation and numerical operations. 
-
-
 Scikit-learn: For data preprocessing, including scaling numerical features and one-hot encoding categorical features. 
-
-
 Joblib: For saving and loading the preprocessor. 
-
 Seaborn & Matplotlib: For data visualization, including the confusion matrix.
-
-
 Gradio: To create and deploy the interactive web-based demo. 
-
 Hugging Face Spaces: For hosting the deployed Gradio application.
-
-
 Flask: A micro web framework for Python. 
+
+
 
 🧠 Model Architecture
 The core of this project is a feedforward neural network built with PyTorch. The architecture is as follows:
