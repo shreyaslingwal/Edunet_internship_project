@@ -17,13 +17,21 @@ https://www.kaggle.com/datasets/sampadab17/network-intrusion-detection
 🛠️ Technologies Used
 This project utilizes the following technologies:
 Python: The core programming language.
+
 PyTorch: The deep learning framework used to build and train the neural network. 
+
 Pandas & NumPy: For data manipulation and numerical operations. 
+
 Scikit-learn: For data preprocessing, including scaling numerical features and one-hot encoding categorical features. 
+
 Joblib: For saving and loading the preprocessor. 
+
 Seaborn & Matplotlib: For data visualization, including the confusion matrix.
+
 Gradio: To create and deploy the interactive web-based demo. 
+
 Hugging Face Spaces: For hosting the deployed Gradio application.
+
 Flask: A micro web framework for Python. 
 
 
