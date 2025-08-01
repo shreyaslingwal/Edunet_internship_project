@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intrusion Detection System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+            margin-top: 30px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .full-width {
+            grid-column: 1 / -1; 
+            text-align: center;
+        }
+        input[type="submit"] {
+            width: auto;
+            background-color: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        h2.prediction {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Enter Network Features to Predict Intrusion</h1>
+
+    <form action="/predict" method="post">
+        <div class="form-group">
+            <label for="duration">duration:</label>
+            <input type="number" id="duration" name="duration" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="protocol_type">protocol_type:</label>
+            <select id="protocol_type" name="protocol_type">
+                <option value="tcp">tcp</option><option value="udp">udp</option><option value="icmp">icmp</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="service">service:</label>
+            <select id="service" name="service">
+                <option value="ftp_data">ftp_data</option><option value="other">other</option><option value="private">private</option><option value="http">http</option><option value="remote_job">remote_job</option><option value="name">name</option><option value="netbios_ns">netbios_ns</option><option value="eco_i">eco_i</option><option value="mtp">mtp</option><option value="telnet">telnet</option><option value="finger">finger</option><option value="domain_u">domain_u</option><option value="supdup">supdup</option><option value="uucp_path">uucp_path</option><option value="Z39_50">Z39_50</option><option value="smtp">smtp</option><option value="csnet_ns">csnet_ns</option><option value="uucp">uucp</option><option value="netbios_dgm">netbios_dgm</option><option value="urp_i">urp_i</option><option value="auth">auth</option><option value="domain">domain</option><option value="ftp">ftp</option><option value="bgp">bgp</option><option value="ldap">ldap</option><option value="ecr_i">ecr_i</option><option value="gopher">gopher</option><option value="vmnet">vmnet</option><option value="systat">systat</option><option value="http_443">http_443</option><option value="efs">efs</option><option value="whois">whois</option><option value="imap4">imap4</option><option value="iso_tsap">iso_tsap</option><option value="echo">echo</option><option value="klogin">klogin</option><option value="link">link</option><option value="sunrpc">sunrpc</option><option value="login">login</option><option value="kshell">kshell</option><option value="sql_net">sql_net</option><option value="time">time</option><option value="hostnames">hostnames</option><option value="exec">exec</option><option value="ntp_u">ntp_u</option><option value="discard">discard</option><option value="nntp">nntp</option><option value="courier">courier</option><option value="ctf">ctf</option><option value="ssh">ssh</option><option value="daytime">daytime</option><option value="shell">shell</option><option value="netstat">netstat</option><option value="pop_3">pop_3</option><option value="nnsp">nnsp</option><option value="pop_2">pop_2</option><option value="printer">printer</option><option value="tim_i">tim_i</option><option value="rje">rje</option><option value="red_i">red_i</option><option value="netbios_ssn">netbios_ssn</option><option value="tftp_u">tftp_u</option><option value="X11">X11</option><option value="IRC">IRC</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="flag">flag:</label>
+            <select id="flag" name="flag">
+                <option value="SF">SF</option><option value="S0">S0</option><option value="REJ">REJ</option><option value="RSTR">RSTR</option><option value="SH">SH</option><option value="RSTO">RSTO</option><option value="S1">S1</option><option value="RSTOS0">RSTOS0</option><option value="S3">S3</option><option value="S2">S2</option><option value="OTH">OTH</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="src_bytes">src_bytes:</label>
+            <input type="number" id="src_bytes" name="src_bytes" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_bytes">dst_bytes:</label>
+            <input type="number" id="dst_bytes" name="dst_bytes" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="land">land (0 or 1):</label>
+            <select id="land" name="land"><option value="0">0</option><option value="1">1</option></select>
+        </div>
+
+        <div class="form-group">
+            <label for="wrong_fragment">wrong_fragment:</label>
+            <input type="number" id="wrong_fragment" name="wrong_fragment" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="urgent">urgent:</label>
+            <input type="number" id="urgent" name="urgent" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="hot">hot:</label>
+            <input type="number" id="hot" name="hot" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="num_failed_logins">num_failed_logins:</label>
+            <input type="number" id="num_failed_logins" name="num_failed_logins" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="logged_in">logged_in (0 or 1):</label>
+            <select id="logged_in" name="logged_in"><option value="0">0</option><option value="1">1</option></select>
+        </div>
+
+        <div class="form-group">
+            <label for="num_compromised">num_compromised:</label>
+            <input type="number" id="num_compromised" name="num_compromised" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="root_shell">root_shell (0 or 1):</label>
+            <select id="root_shell" name="root_shell"><option value="0">0</option><option value="1">1</option></select>
+        </div>
+
+        <div class="form-group">
+            <label for="su_attempted">su_attempted:</label>
+            <input type="number" id="su_attempted" name="su_attempted" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="num_root">num_root:</label>
+            <input type="number" id="num_root" name="num_root" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="num_file_creations">num_file_creations:</label>
+            <input type="number" id="num_file_creations" name="num_file_creations" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="num_shells">num_shells:</label>
+            <input type="number" id="num_shells" name="num_shells" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="num_access_files">num_access_files:</label>
+            <input type="number" id="num_access_files" name="num_access_files" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="num_outbound_cmds">num_outbound_cmds:</label>
+            <input type="number" id="num_outbound_cmds" name="num_outbound_cmds" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="is_host_login">is_host_login (0 or 1):</label>
+            <select id="is_host_login" name="is_host_login"><option value="0">0</option><option value="1">1</option></select>
+        </div>
+
+        <div class="form-group">
+            <label for="is_guest_login">is_guest_login (0 or 1):</label>
+            <select id="is_guest_login" name="is_guest_login"><option value="0">0</option><option value="1">1</option></select>
+        </div>
+
+        <div class="form-group">
+            <label for="count">count:</label>
+            <input type="number" id="count" name="count" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="srv_count">srv_count:</label>
+            <input type="number" id="srv_count" name="srv_count" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="serror_rate">serror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="serror_rate" name="serror_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="srv_serror_rate">srv_serror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="srv_serror_rate" name="srv_serror_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rerror_rate">rerror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="rerror_rate" name="rerror_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="srv_rerror_rate">srv_rerror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="srv_rerror_rate" name="srv_rerror_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="same_srv_rate">same_srv_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="same_srv_rate" name="same_srv_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="diff_srv_rate">diff_srv_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="diff_srv_rate" name="diff_srv_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="srv_diff_host_rate">srv_diff_host_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="srv_diff_host_rate" name="srv_diff_host_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_count">dst_host_count:</label>
+            <input type="number" id="dst_host_count" name="dst_host_count" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_srv_count">dst_host_srv_count:</label>
+            <input type="number" id="dst_host_srv_count" name="dst_host_srv_count" value="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_same_srv_rate">dst_host_same_srv_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_same_srv_rate" name="dst_host_same_srv_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_diff_srv_rate">dst_host_diff_srv_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_diff_srv_rate" name="dst_host_diff_srv_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_same_src_port_rate">dst_host_same_src_port_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_same_src_port_rate" name="dst_host_same_src_port_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_srv_diff_host_rate">dst_host_srv_diff_host_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_srv_diff_host_rate" name="dst_host_srv_diff_host_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_serror_rate">dst_host_serror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_serror_rate" name="dst_host_serror_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_srv_serror_rate">dst_host_srv_serror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_srv_serror_rate" name="dst_host_srv_serror_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_rerror_rate">dst_host_rerror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_rerror_rate" name="dst_host_rerror_rate" value="0.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dst_host_srv_rerror_rate">dst_host_srv_rerror_rate (0.0-1.0):</label>
+            <input type="number" step="0.01" min="0" max="1" id="dst_host_srv_rerror_rate" name="dst_host_srv_rerror_rate" value="0.0" required>
+        </div>
+
+        <div class="full-width">
+            <input type="submit" value="Predict">
+        </div>
+    </form>
+
+    <h2 class="prediction">{{ prediction_text }}</h2>
+
+</div>
+
+</body>
+</html>
